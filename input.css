@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.paint_palette {
+    cursor: pointer;
+}
+
+#portrait-preview {
+    position: fixed;
+    width: 220px;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ========================================
+   CHART LAYOUT
+======================================== */
+
+#archibald-colours {
+    width: 100%;
+    min-width: 0;
+}
+
+#colour-chart {
+    display: grid;
+    width: 100%;
+    height: 65vh;
+    min-height: 300px;
+    overflow: hidden;
+}
+
+#colour-markers {
+    display: grid;
+    width: 100%;
+    margin-top: 8px;
+}
+
+#colour-comparison[hidden] {
+    display: none;
+}
+
+
+/* ========================================
+   YEAR BARS
+======================================== */
+
+#archibald-colours .year-bar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: hidden;
+    cursor: pointer;
+    appearance: none;
+    transition: opacity 300ms ease;
+}
+
+
+/* ========================================
+   INDIVIDUAL COLOURS
+======================================== */
+
+#archibald-colours .colour-segment {
+    display: block;
+    width: 100%;
+    min-height: 0;
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   COMPARISON CHART
+======================================== */
+
+#archibald-colours .comparison-chart {
+    display: grid;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+}
+
+
+/* ========================================
+   CONTROLS
+======================================== */
+
+#archibald-colours .chart-btn {
+    padding: 8px 16px;
+    border: 1px solid currentColor;
+    border-radius: 30px;
+    /* font-size: 13px; */
+    cursor: pointer;
+    transition: background 200ms, color 200ms;
+    text-transform: uppercase;
+}
+
+#archibald-colours .chart-btn.active {
+    background: #FDE68A;
+    color: #1F2937;
+}
+
+#archibald-colours .chart-select {
+    padding: 8px 12px;
+    border: 1px solid currentColor;
+    border-radius: 6px;
+    background: transparent;
+    /* font-size: 13px; */
+    font-size: 0.625rem;
+}
+
+#archibald-colours .decade-marker {
+    /* font-size: 11px; */
+    font-size: 0.625rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    /* padding-left: 4px; */
+    /* border-left: 1px solid currentColor; */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#archibald-colours .year-bar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: hidden;
+    transition: opacity 150ms ease;
+}
+
+#archibald-colours .colour-segment {
+    display: block;
+    width: 100%;
+    min-height: 0;
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+#colour-tooltip {
+    pointer-events: none;
+}
+
+/* ========================================
+   CANVAS CHART
+======================================== */
+
+#canvas-chart {
+    position: relative;
+    width: 100%;
+}
+
+
+/* ========================================
+   PORTRAIT OUTLINES
+======================================== */
+
+#canvas-chart .canvas-outline {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    box-sizing: border-box;
+
+    border: 1px solid currentColor;
+
+    background: transparent;
+
+    opacity: 0.25;
+
+    pointer-events: none;
+
+    transition: opacity 150ms ease,
+                border-color 150ms ease;
+}
+
+
+/* ========================================
+   HIGHLIGHTED PORTRAIT
+======================================== */
+
+#canvas-chart .canvas-outline.is-active {
+    border-width: 2px;
+    opacity: 1;
+    z-index: 10;
+}
+
+
+/* ========================================
+   INACTIVE PORTRAITS
+======================================== */
+
+#canvas-chart .canvas-outline.is-muted {
+    opacity: 0.12;
+}
+
+
+/* ========================================
+   AVERAGE OUTLINE
+======================================== */
+
+#canvas-chart .canvas-average {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    box-sizing: border-box;
+
+    border: 2px solid currentColor;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+/* ========================================
+   TOOLTIP
+======================================== */
+
+#canvas-tooltip {
+    pointer-events: none;
+}
