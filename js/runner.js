@@ -5,7 +5,6 @@
 
 const CONFIG = {
     csvPath: G_SHEET_URL,
-    palettePath: "imgs/palettes/",
     fps: 10,
     debug: true
 };
@@ -119,22 +118,6 @@ const CONFIG = {
       }
 
       // ========================================
-      // LOCAL IMAGE PATH
-      // ========================================
-
-      function localPath(value) {
-        const name = String(value || "")
-          .trim()
-
-          .split(/[?#]/)[0]
-          .split("/")
-
-          .pop();
-
-        return name ? CONFIG.palettePath + name : null;
-      }
-
-      // ========================================
       // PRELOAD IMAGES
       // ========================================
 
@@ -192,15 +175,15 @@ const CONFIG = {
 
           // Validate palette header
 
-          if (!data.meta.fields?.includes("palette")) {
-            throw new Error('The Google Sheet does not contain a "palette" header.');
+          if (!data.meta.fields?.includes("palette_web")) {
+            throw new Error('The Google Sheet does not contain a "palette_web" header.');
           }
 
-          // Retrieve local palette paths
+          // Retrieve remote palette URLs
 
           const paths = data.data
 
-            .map((row) => localPath(row.palette))
+            .map((row) => row.palette_web?.trim())
 
             .filter(Boolean);
 
@@ -209,7 +192,7 @@ const CONFIG = {
 
             console.log("CSV Headers:", data.meta.fields);
 
-            console.log("Palette paths:", paths);
+            console.log("Palette URLs:", paths);
 
             console.log("Palettes found:", paths.length);
 
@@ -225,7 +208,7 @@ const CONFIG = {
           items = loaded.filter(Boolean);
 
           if (!items.length) {
-            throw new Error("No matching local palette images found.");
+            throw new Error("No remote palette images could be loaded.");
           }
 
           if (CONFIG.debug) {
