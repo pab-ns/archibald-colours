@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sheetURL = G_SHEET_URL;
     const container = document.getElementById("palette-grid");
-    const imgPath = "imgs/palettes/";
 
     // Create floating portrait preview
     const preview = document.createElement("img");
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = results.data;
 
             container.innerHTML = data
-                .filter(row => row.year && row.palette && row.artist)
+                .filter(row => row.year && row.palette_web?.trim() && row.artist)
                 .map(row => `
                     <div class="flex flex-col font-mono text-neutral-400">
 
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         <img
                             class="paint_palette mt-2"
-                            src="${imgPath}${row.palette.trim()}"
+                            src="${row.palette_web.trim()}"
                             data-portrait="${row.img_web?.trim() || ''}"
                             alt="${row.year} colour palette"
                             loading="lazy"
